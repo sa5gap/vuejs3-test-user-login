@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack --mode=development",
-    "serve": "node ./json-server.js & webpack-dev-server --mode=development",
+    "serve": "node ./json-server.js & webpack-dev-server --mode=development --open",
     "build": "webpack --mode=production",
     "db": "node ./json-server.js"
   },
