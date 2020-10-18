@@ -25,9 +25,15 @@ server.get('/authorize', (req, res) => {
         .update(JSON.stringify(user) + Date.now())
         .digest('hex')
       tokens[user.login] = hash
-      console.log(tokens)
+      console.log(
+        'authorization of user = %s, token = %s',
+        user.login,
+        hash,
+        tokens
+      )
       res.jsonp({ authorized: true, token: hash })
     } else {
+      console.log('authorization of user %s failed', user.login, tokens)
       res.jsonp({ error: 'User is not found' })
     }
   }
@@ -36,10 +42,10 @@ server.get('/authorize', (req, res) => {
 server.get('/contacts', (req, res) => {
   const { token, user } = req.query
   if (tokens[user] && tokens[user] === token) {
-    console.log('contacts=', user, token)
-    console.log('contacts=', db.contacts)
+    console.log('authorised user %s asks contacts...', user, db.contacts)
     res.jsonp({ data: db.contacts })
   } else {
+    console.log('unauthorised user %s asks contacts!', user)
     res.jsonp({ error: 'Access denied!' })
   }
 })
