@@ -46,7 +46,7 @@
               td 
                 button(@click="onEdit(row, i)") Edit
     footer
-      template(v-if="search") Found {{ records.length }} record(s)
+      template(v-if="search") Found {{ records.length }} of {{ contacts.data.length }} record(s)
       template(v-else-if="contacts.loading") Loading....
       template(v-else) {{ records.length }} record(s)
 </template>
@@ -54,7 +54,7 @@
 <script lang="ts">
   import { defineComponent, toRef, watch, ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { user, logout } from '../store/useUsers'
+  import { user, exit } from '../store/user'
   import {
     ContactRecord,
     contacts,
@@ -65,13 +65,14 @@
     clear,
     getIndexById,
     getLastId,
-  } from '../store/useContacts'
+  } from '../store/contacts'
 
   const UNSELECTED = -1
 
   export default defineComponent({
     setup() {
       const router = useRouter()
+
       watch(
         () => user.authorized,
         (v) => {
@@ -80,11 +81,11 @@
         { immediate: true }
       )
 
-      load()
+      load(user)
 
       return {
         userName: user.name,
-        logout,
+        exit,
         contacts,
       }
     },
@@ -127,10 +128,14 @@
     methods: {
       onLogout() {
         clear()
-        logout()
+        exit()
       },
 
       onEdit(row: ContactRecord) {
+        if (this.id > UNSELECTED) {
+          if (!window.confirm('Discard unsaved changes?')) return
+          this.onCancel()
+        }
         this.id = +row.id
         this.backup = Object.assign({}, row)
       },
@@ -151,14 +156,13 @@
       onCancel() {
         if (this.isNewRecord) {
           this.isNewRecord = false
-          this.unselectRecord()
         } else {
           const index = getIndexById(this.backup.id)
           if (index !== false) {
             this.contacts.data[index] = this.backup
-            this.unselectRecord()
           }
         }
+        this.unselectRecord()
       },
 
       onRemove(id: number) {

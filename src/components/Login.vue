@@ -10,7 +10,7 @@
 <script lang="ts">
   import { defineComponent, reactive, toRefs, computed } from 'vue'
   import { useRouter } from 'vue-router'
-  import { user, authorize } from '../store/useUsers'
+  import { user, authorize } from '../store/user'
 
   interface ComponentData {
     name: string | null
@@ -21,6 +21,7 @@
   export default defineComponent({
     setup() {
       const router = useRouter()
+
       let data: ComponentData = reactive({
         name: null,
         password: null,
@@ -38,7 +39,6 @@
             await authorize(data.name, data.password)
             if (user.authorized) {
               router.push({ name: 'contacts' })
-              data.error = user.token
             } else {
               data.error = user.error
             }
@@ -46,37 +46,12 @@
             data.error = e
           }
         } else {
-          data.error = 'Please input name and password!'
+          data.error = 'Please input your name and password!'
         }
       }
+
       return { ...toRefs(data), buttonText, login }
     },
-
-    // computed: {
-    //   buttonText() {
-    //     return user.loading ? 'Please wait...' : 'Login'
-    //   },
-    // },
-    // methods: {
-    //   async login() {
-    //     if (this.name && this.password) {
-    //       this.error = null
-    //       try {
-    //         await authorize(this.name, this.password)
-    //         if (user.authorized) {
-    //           this.$router.push({ name: 'contacts' })
-    //           this.error = user.token
-    //         } else {
-    //           this.error = user.error
-    //         }
-    //       } catch (e) {
-    //         this.error = e
-    //       }
-    //     } else {
-    //       this.error = 'Please input name and password!'
-    //     }
-    //   },
-    // },
   })
 </script>
 
