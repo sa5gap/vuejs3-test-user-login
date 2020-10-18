@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    small Vue.js 3.0 (Composition API)+ Typescript
+    small Vue.js 3.0 (Composition/Options API) + Typescript
   img(alt="Vue logo" src="./assets/logo.png")
   router-view
 </template>
