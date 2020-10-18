@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "admin",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "login": "user",
+      "password": "qwerty"
+    }
+  ],
+  "contacts": [
+    { "id": 4, "name": "Илон Маск", "email": "musk@example.com" },
+    { "id": 5, "name": "Джо Роган", "email": "rogan@example.com" },
+    { "id": 6, "name": "Пол Стеметс", "email": "stamets@example.com" },
+    { "id": 7, "name": "Билл Гейтс", "email": "gates@example.com" },
+    { "id": 8, "name": "Теренс МакКена", "email": "mckenna@example.com" }
+  ]
+}
