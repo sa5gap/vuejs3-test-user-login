@@ -25,11 +25,11 @@ This is the repository for the test solution
   - Open in your browser `projectRoot/dist` folder
   - For production build there is generated report of bundled depedencies, see `projectRoot/dist/report.html`
 
-- ### Simple alternative - run webpack dev server
+<!-- - ### Simple alternative - run webpack dev server
   ```bash
   yarn serve
   ```
-  this will start database server and launch browser automatically at the server url `http://localhost:9090/`
+  this will start database server and launch browser automatically at the server url `http://localhost:9090/` -->
 
 ## Usage
 
