@@ -4,6 +4,7 @@ module.exports = (env, options) => {
   const { src, dist } = paths()
   return webpackConfig(env, options, {
     entry: { app: src('main.ts') },
+    plugins: { clean: false },
     devServer: { port: 9090 },
   })
 }

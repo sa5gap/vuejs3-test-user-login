@@ -341,8 +341,8 @@ module.exports.default = (
               safari10: true,
             },
           },
-          sourceMap: true,
-          cache: true,
+          // sourceMap: true,
+          // cache: true,
           parallel: true,
           extractComments: false,
         }),
@@ -424,7 +424,7 @@ module.exports.default = (
               to: dist(),
               toType: 'dir',
               globOptions: {
-                ignore: ['.DS_Store', 'index.html'],
+                ignore: ['**/index.html'],
               },
             },
           ],
@@ -463,13 +463,13 @@ module.exports.default = (
       // }}}
 
       // production: extra plugins {{{
-      ...pluginFactory(
-        isProd,
-        () =>
-          new HashedModuleIdsPlugin({
-            hashDigest: 'hex',
-          })
-      ),
+      // ...pluginFactory(
+      //   isProd,
+      //   () =>
+      //     new HashedModuleIdsPlugin({
+      //       hashDigest: 'hex',
+      //     })
+      // ),
       /// }}}
 
       // production: analize {{{
@@ -487,7 +487,7 @@ module.exports.default = (
       ...(plugins.extra || []),
       // }}}
 
-      new WebpackBar(),
+      // new WebpackBar(),
     ].filter((plugin) => plugin),
 
     devServer: devServer.all || {
