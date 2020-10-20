@@ -1,7 +1,7 @@
 <template lang="pug">
+  ContactsUserHeader(:name="userName" @logout="onLogout")
+  //- ContactsTable
   section.contacts
-    div <b>{{ userName }}</b> - 
-      a(href="#" @click.prevent="onLogout") Logout
     header
       h1 Contacts
       div
@@ -66,10 +66,15 @@
     getIndexById,
     getLastId,
   } from '../store/contacts'
+  import ContactsUserHeader from '../components/ContactsUserHeader.vue'
 
   const UNSELECTED = -1
 
   export default defineComponent({
+    components: {
+      ContactsUserHeader,
+    },
+
     setup() {
       const router = useRouter()
 
