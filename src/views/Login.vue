@@ -1,9 +1,13 @@
 <template lang="pug">
-  LoginForm(title="Login" @login="onLogin" :error="error")
+  LoginForm(
+    @login="onLogin" 
+    :error="error"
+    :busy="loading"
+  )
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, computed, ref, Ref } from 'vue'
+  import { defineComponent, toRef, ref, Ref, watch } from 'vue'
   import { useRouter } from 'vue-router'
   import { user, authorize } from '../store/user'
   import LoginForm from '../components/LoginForm.vue'
@@ -35,7 +39,11 @@
         }
       }
 
-      return { onLogin, error }
+      return {
+        onLogin,
+        error,
+        loading: toRef(user, 'loading'),
+      }
     },
   })
 </script>

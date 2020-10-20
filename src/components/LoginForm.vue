@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, defineComponent, ref, watch } from 'vue'
 
   export default defineComponent({
     props: {
@@ -17,12 +17,12 @@
         default: 'Login',
       },
       error: String,
-      isLoading: Boolean,
+      busy: Boolean,
     },
-    setup({ isLoading }, { emit }) {
+    setup(props, { emit }) {
       let name = ref('')
       let password = ref('')
-      let buttonText = computed(() => (isLoading ? 'Please wait...' : 'Login'))
+      let buttonText = computed(() => (props.busy ? 'Please wait...' : 'Login'))
 
       const login = () => {
         emit('login', name, password)
