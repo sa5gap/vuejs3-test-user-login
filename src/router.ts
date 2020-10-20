@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Login from './components/Login.vue'
-import Contacts from './components/Contacts.vue'
+import Login from './views/Login.vue'
+import Contacts from './views/Contacts.vue'
 
 export const router = createRouter({
   history: createWebHashHistory(),
