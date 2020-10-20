@@ -6,20 +6,18 @@
   import { defineComponent, reactive, toRefs, computed, ref, Ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { user, authorize } from '../store/user'
-
   import LoginForm from '../components/LoginForm.vue'
 
+  type OnLogin = (name: Ref<string>, password: Ref<string>) => Promise<void>
+
   export default defineComponent({
-    components: {
-      LoginForm,
-    },
+    components: { LoginForm },
 
     setup() {
       const router = useRouter()
-
       let error = ref<string | null>(null)
 
-      const onLogin = async (name: Ref<string>, password: Ref<string>) => {
+      const onLogin: OnLogin = async (name, password) => {
         if (name.value && password.value) {
           error.value = null
           try {
