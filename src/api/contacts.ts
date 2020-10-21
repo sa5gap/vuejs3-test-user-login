@@ -18,8 +18,8 @@ export async function load(name: string, token: string) {
   }
 }
 
-export async function save() {
-  await delay(500)
+export async function update(record: ContactRecord) {
+  await delay(1500)
   return true
 }
 
