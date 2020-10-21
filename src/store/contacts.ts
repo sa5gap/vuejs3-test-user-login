@@ -30,11 +30,17 @@ export async function load(user: User) {
   }
 }
 
-export async function save() {
+export async function update(row: ContactRecord) {
   try {
-    api.save()
+    const index = getIndexById(row.id)
+    if (index === false) {
+      throw 'Record not found!'
+    }
+    await api.update(row)
+    contacts.data.splice(index, 1, row)
   } catch (e) {
     contacts.error = e
+    console.warn(e)
   }
 }
 
@@ -43,24 +49,24 @@ export async function clear() {
 }
 
 export async function remove(id: number) {
-  const index = getIndexById(id)
-  if (index !== false) {
-    contacts.data.splice(index, 1)
-    try {
-      api.remove(id)
-    } catch (e) {
-      contacts.error = e
+  try {
+    const index = getIndexById(id)
+    if (index === false) {
+      throw 'Record not found!'
     }
-  } else {
-    contacts.error = 'data error'
+    await api.remove(id)
+    contacts.data.splice(index, 1)
+  } catch (e) {
+    contacts.error = e
   }
 }
 
 export async function append(record: api.ContactRecord) {
   try {
+    // TODO: move to API in production
     record.id = getLastId() + 1
-    api.append(record)
-    contacts.data.unshift(record)
+    await api.append(record)
+    contacts.data.splice(0, 0, record)
   } catch (e) {
     contacts.error = e
   }
