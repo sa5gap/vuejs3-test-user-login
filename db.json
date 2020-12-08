@@ -16,7 +16,6 @@
     { "id": 5, "name": "Джо Роган", "email": "rogan@example.com" },
     { "id": 6, "name": "Пол Стеметс", "email": "stamets@example.com" },
     { "id": 7, "name": "Билл Гейтс", "email": "gates@example.com" },
-    { "id": 8, "name": "Теренс МакКена", "email": "mckenna@example.com" },
-    { "id": 9, "name": "Теренс МакКена", "email": "mckenna@example.com" }
+    { "id": 8, "name": "Теренс МакКена", "email": "mckenna@example.com" }
   ]
 }
